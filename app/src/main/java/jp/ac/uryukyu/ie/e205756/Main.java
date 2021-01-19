@@ -118,6 +118,10 @@ class Hot{
             Scanner scanner = new Scanner(System.in);
             int command = scanner.nextInt();
             System.out.println(drinks.get(command-1).price+"円になります");
+            System.out.println("金額を入力下さい！");        
+            int money = scanner.nextInt(); 
+            var m = new Money(money); 
+            m.output(drinks.get(command-1).price , drinks.get(command-1).name);
         }
         catch(IndexOutOfBoundsException e){
             System.out.println("※そのメニュー番号はございません！");
@@ -176,6 +180,10 @@ class Ice{
             Scanner scanner = new Scanner(System.in);
             int command = scanner.nextInt();
             System.out.println(drinks.get(command-1).price+"円になります");
+            System.out.println("金額を入力下さい！");        
+            int money = scanner.nextInt(); 
+            var m = new Money(money); 
+            m.output(drinks.get(command-1).price , drinks.get(command-1).name);
         }
         catch(IndexOutOfBoundsException e){
             System.out.println("※そのメニュー番号はございません！");
@@ -189,5 +197,53 @@ class Ice{
      */
     public void returnInput(){
         input();
+    }
+}
+
+/**
+ * Moneyクラス
+ * 入力した金額で購入を完了させ、おつりまで表示させる
+ */
+class Money{
+
+    private int commandInput;
+    private int change;
+
+    Money(int commandInput){
+        this.commandInput = commandInput;
+    }
+
+    /**
+     * outputメソッド
+     * 入力した金額で購入を完了させ、おつりまで表示させる
+     * @param p 指定したドリンクの値段
+     * @param n 指定したドリンクの名前
+     */
+    public void output(int p , String n){
+        if(commandInput >= p){
+            change = commandInput - p;
+            System.out.println(n+"を購入しました");
+            System.out.println("おつりは" + change + "円");
+        }
+        else{
+            change = p - commandInput;
+            System.out.println("※" + change + "円足りません！");
+            returnOutput(commandInput , p , n);
+        }
+    }
+
+    /**
+     * returnOutputメソッド
+     * 入力した金額が足りていない際に、買える金額になるまで入力させる
+     * @param co 入力した金額
+     * @param pri 指定したドリンクの値段
+     * @param na 指定したドリンクの名前
+     */
+    public void returnOutput(int co , int pri , String na){
+        System.out.println("金額を加えて下さい！");
+        Scanner scanner = new Scanner(System.in);
+        int command = scanner.nextInt();
+        var mo = new Money(co+command);
+        mo.output(pri , na);
     }
 }
