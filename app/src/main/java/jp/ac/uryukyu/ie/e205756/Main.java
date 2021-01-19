@@ -46,6 +46,7 @@ class Solver {
             hot.menue(new Hot(8,"ホットレモン",110));
             hot.menue(new Hot(9,"みそ汁",100));
             hot.menue(new Hot(10,"おしるこ",120));
+            hot.input();
         }
         else if(warmthInput.equals(warmth.get(1))){
             ice.menue(new Ice(1,"オレンジジュース",100));
@@ -58,6 +59,7 @@ class Solver {
             ice.menue(new Ice(8,"アセロラジュース",130));
             ice.menue(new Ice(9,"エナジードリンク",210));
             ice.menue(new Ice(10,"ヤクルト",90));
+            ice.input();
         }
         else{
             System.out.println("※「hot」か「ice」でお選び下さい！");
@@ -105,6 +107,31 @@ class Hot{
     public void menue(Hot drink){
         drinks.add(drink);
     }
+
+    /**
+     * inputメソッド
+     * メニュー番号の入力でドリンクの値段を指定し、金額を入力させる
+     */
+    public void input(){
+        try{
+            System.out.println("メニュー番号を入力下さい！"); 
+            Scanner scanner = new Scanner(System.in);
+            int command = scanner.nextInt();
+            System.out.println(drinks.get(command-1).price+"円になります");
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("※そのメニュー番号はございません！");
+            returnInput(); 
+        }
+    }
+
+    /**
+     * returnInputメソッド
+     * メニュー番号で存在しない番号の入力の際に、再度入力させる
+     */
+    public void returnInput(){
+        input();
+    }
 }
 
 /**
@@ -137,5 +164,30 @@ class Ice{
      */
     public void menue(Ice drink){
         drinks.add(drink);
+    }
+
+    /**
+     * inputメソッド
+     * メニュー番号の入力でドリンクの値段を指定し、金額を入力させる
+     */
+    public void input(){
+        try{
+            System.out.println("メニュー番号を入力下さい！"); 
+            Scanner scanner = new Scanner(System.in);
+            int command = scanner.nextInt();
+            System.out.println(drinks.get(command-1).price+"円になります");
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("※そのメニュー番号はございません！");
+            returnInput(); 
+        }
+    }
+
+    /**
+     * returnInputメソッド
+     * メニュー番号で存在しない番号の入力の際に、再度入力させる
+     */
+    public void returnInput(){
+        input();
     }
 }
