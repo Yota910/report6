@@ -1,3 +1,4 @@
+package jp.ac.uryukyu.ie.e205756;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main{
